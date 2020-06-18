@@ -57,7 +57,7 @@ public class GamePlay {
         int hp = ai.getCurrentHP();
         ai.setCurrentHP(hp - player.getPlayer().getAttack());
         int hpp = player.getCurrentHP();
-        player.setCurrentHP(hpp - player.getPlayer().getAttack());
+        player.setCurrentHP(hpp - (player.getPlayer().getAttack()/10));
 
         if (ai.getCurrentHP()<=0){
             ai.setAlive(false);
