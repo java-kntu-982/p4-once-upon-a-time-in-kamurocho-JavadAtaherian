@@ -6,7 +6,9 @@
 package ir.ac.kntu.Menu;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -70,6 +72,7 @@ public class CreditMenu extends Application {
         primaryStage.setTitle("once upon a time in kamurocho  (CREDIT)");
         primaryStage.setScene(scene);
         primaryStage.show();
+
     }
 
     private static class Title extends StackPane {
@@ -103,6 +106,18 @@ public class CreditMenu extends Application {
             setOnMouseExited(event -> {
                     bg.setFill(null);
                     text.setFill(Color.WHITE);
+            });
+
+            setOnMouseClicked( event -> {
+                ((Node)(event.getSource())).getScene().getWindow().hide();
+                Platform.runLater(() -> {
+                    try {
+
+                        new MainMenu().start(new Stage());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
             });
 
         }

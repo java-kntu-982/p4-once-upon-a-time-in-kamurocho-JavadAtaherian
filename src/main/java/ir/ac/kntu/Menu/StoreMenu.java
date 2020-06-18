@@ -1,8 +1,11 @@
-/*TODO : create proper data structure for store and currency also make this a store ...*/
 package ir.ac.kntu.Menu;
 
+import ir.ac.kntu.Database.Database;
+import ir.ac.kntu.solider.Mercenaies;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -31,30 +34,60 @@ public class StoreMenu extends Application {
     private Parent createContent() {
         Pane root = new Pane();
 
-        root.setPrefSize(1000, 600);
+        root.setPrefSize(1280, 768);
 
-        try (InputStream is = Files.newInputStream(Paths.get("./Pictures/img3.jpg"))) {
+        try (InputStream is = Files.newInputStream(Paths.get("./Pictures/img2.jpg"))) {
             ImageView img = new ImageView(new Image(is));
-            img.setFitWidth(1050);
-            img.setFitHeight(600);
+            img.setFitWidth(1280);
+            img.setFitHeight(768);
             root.getChildren().add(img);
         } catch (IOException e) {
             System.out.println("Couldn't load image");
         }
 
-        Title title = new Title("Asian Union");
-        title.setTranslateX(30);
-        title.setTranslateY(300);
+        Title title = new Title("S T O R E" , 375 , 60);
+        title.setTranslateX(452);
+        title.setTranslateY(50);
 
-        MenuBox vbox = new MenuBox(
-                new MenuItem("N E W   G A M E "),
-                new MenuItem("J O I N   CO - OP"),
-                new MenuItem("C R E D I T"));
-        vbox.setTranslateX(105);
-        vbox.setTranslateY(380);
+        Title title4 = new Title("B A C K" , 250 , 60);
+        title4.setTranslateX(452);
+        title4.setTranslateY(700);
+
+        Title title2 = new Title("HIRED MERCENARIES" , 550 , 70);
+        title2.setTranslateX(80);
+        title2.setTranslateY(140);
+
+        Title title3 = new Title("AVAILABLE" , 550 , 70);
+        title3.setTranslateX(640);
+        title3.setTranslateY(140);
+
+        Title title5 = new Title("Wallet =  " + Database.wallet.getMoney() , 300, 60);
+        title5.setTranslateX(30);
+        title5.setTranslateY(700);
 
 
-        root.getChildren().addAll(title, vbox);
+        Database.updateHired();
+        MenuItem[] menuItems = new MenuItem[Database.hiredMercenaries.size()];
+        for (int i = 0; i < Database.hiredMercenaries.size() ; i++) {
+            menuItems[i] = new MenuItem(Database.hiredMercenaries.get(i));
+        }
+
+        Database.updateAvailable();
+        MenuItem[] menuItems2 = new MenuItem[Database.availableMercenaries.size()];
+        for (int i = 0; i < Database.availableMercenaries.size() ; i++) {
+            menuItems2[i] = new MenuItem(Database.availableMercenaries.get(i));
+        }
+
+        MenuBox vbox = new MenuBox(menuItems);
+        vbox.setTranslateX(140);
+        vbox.setTranslateY(215);
+
+        MenuBox vbox2 = new MenuBox(menuItems2);
+        vbox2.setTranslateX(700);
+        vbox2.setTranslateY(215);
+
+
+        root.getChildren().addAll(title, title2 , title3 , title4, title5,  vbox , vbox2);
 
         return root;
 
@@ -63,7 +96,7 @@ public class StoreMenu extends Application {
     @Override
     public void start(Stage primaryStage2) throws Exception {
         Scene scene = new Scene(createContent());
-        primaryStage2.setTitle("once upon a time in kamurocho");
+        primaryStage2.setTitle("once upon a time in kamurocho (store)");
         primaryStage2.setScene(scene);
         primaryStage2.show();
 
@@ -71,18 +104,51 @@ public class StoreMenu extends Application {
     }
 
     private static class Title extends StackPane {
-        public Title(String name) {
-            Rectangle bg = new Rectangle(375, 60);
-            bg.setStroke(Color.WHITE);
+        public Title(String name , int width , int length) {
+
+            LinearGradient gradient = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, new Stop[]{
+                    new Stop(0, Color.DARKRED),
+                    new Stop(0.1, Color.BLACK),
+                    new Stop(0.9, Color.BLACK),
+                    new Stop(1, Color.DARKRED)
+
+            });
+
+            Rectangle bg = new Rectangle(width, length);
+            bg.setStroke(Color.DARKRED);
             bg.setStrokeWidth(2);
             bg.setFill(null);
 
             Text text = new Text(name);
-            text.setFill(Color.WHITE);
+            text.setFill(Color.BLACK);
             text.setFont(Font.font("Times New Roman", FontWeight.SEMI_BOLD, 50));
 
             setAlignment(Pos.CENTER);
             getChildren().addAll(bg, text);
+
+            setOnMouseEntered( event -> {
+                bg.setFill(gradient);
+                text.setFill(Color.WHITE);
+            });
+
+            setOnMouseExited(event -> {
+                bg.setFill(null);
+                text.setFill(Color.BLACK);
+            });
+
+            setOnMouseClicked( event -> {
+                ((Node)(event.getSource())).getScene().getWindow().hide();
+                Platform.runLater(() -> {
+                    try {
+
+                        new MainMenu().start(new Stage());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+            });
+
+
         }
     }
 
@@ -106,19 +172,19 @@ public class StoreMenu extends Application {
 
 
     private static class MenuItem extends StackPane {
-        public MenuItem(String name) {
+        public MenuItem(Mercenaies mercenary) {
             LinearGradient gradient = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, new Stop[]{
-                    new Stop(0, Color.DARKBLUE),
+                    new Stop(0, Color.SILVER),
                     new Stop(0.1, Color.BLACK),
                     new Stop(0.9, Color.BLACK),
-                    new Stop(1, Color.DARKBLUE)
+                    new Stop(1, Color.SILVER)
 
             });
 
-            Rectangle bg = new Rectangle(200, 30);
+            Rectangle bg = new Rectangle(450, 30);
             bg.setOpacity(0.4);
 
-            Text text = new Text(name);
+            Text text = new Text(mercenary.getName() + " | " + "attack= " + mercenary.getAttack() + " | " + "health" +mercenary.getHealth() + " | " + "$: " + mercenary.getPrice());
             text.setFill(Color.DARKGREY);
             text.setFont(Font.font("Times New Roman", FontWeight.SEMI_BOLD, 20));
 
@@ -141,10 +207,15 @@ public class StoreMenu extends Application {
 
 
             setOnMouseClicked(event -> {
-                if (name.equals("N E W   G A M E ")) {
-                    System.out.println("dfghdkfjsdhf");
+               if (mercenary.isHired()==false && Database.wallet.getMoney()>= mercenary.getPrice()){
+                   Database.hiredMercenaries.add(mercenary);
+                   Database.wallet.setMoney(Database.wallet.getMoney()-mercenary.getPrice());
 
-                }
+               }else if (Database.wallet.getMoney()<= mercenary.getPrice()){
+                   System.out.println("you don't have enough money , you are broke dude :) ");
+               }
+
+
 
 
             });

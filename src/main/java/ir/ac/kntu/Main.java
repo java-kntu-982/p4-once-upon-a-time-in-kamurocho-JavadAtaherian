@@ -1,5 +1,6 @@
 package ir.ac.kntu;
 
+import ir.ac.kntu.Database.Database;
 import ir.ac.kntu.Menu.MainMenu;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -19,6 +20,8 @@ import java.util.TimerTask;
 public class Main {
 
     public static void main(String[] args) {
+        Database.addTheFreeMercenary();
+        Database.set500ToWallet();
         MainMenu.main(args);
     }
 
