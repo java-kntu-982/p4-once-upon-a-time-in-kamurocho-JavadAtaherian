@@ -1,5 +1,6 @@
 package ir.ac.kntu.solider;
 
+import ir.ac.kntu.Database.RandomHelper;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.TriangleMesh;
@@ -17,10 +18,10 @@ public class Player {
 
 
 
-    public Player(int index, int currentX, int currentY, int currentHP, int speed, boolean isFighting, boolean isAlive) {
-        this.player = Mercenaies.byIndex(index);
-        this.currentX = currentX;
-        this.currentY = currentY;
+    public Player(Mercenaies mercenaies ) {
+        this.player = mercenaies;
+        this.currentX = RandomHelper.nextInt(200)+30;
+        this.currentY = RandomHelper.nextInt(600)+30;
         this.currentHP = player.getHealth();
         this.speed = 4;
         this.isFighting = false;

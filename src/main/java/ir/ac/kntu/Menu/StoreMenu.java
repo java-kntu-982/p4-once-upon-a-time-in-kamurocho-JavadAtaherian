@@ -209,6 +209,7 @@ public class StoreMenu extends Application {
             setOnMouseClicked(event -> {
                if (mercenary.isHired()==false && Database.wallet.getMoney()>= mercenary.getPrice()){
                    Database.hiredMercenaries.add(mercenary);
+                   mercenary.setHired(true);
                    Database.wallet.setMoney(Database.wallet.getMoney()-mercenary.getPrice());
 
                }else if (Database.wallet.getMoney()<= mercenary.getPrice()){

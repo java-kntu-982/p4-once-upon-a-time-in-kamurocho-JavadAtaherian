@@ -147,7 +147,7 @@ public class MainMenu extends Application{
                             //MUST CHANGE THIS TO STARTING THE GAME
                             /*TODO:change this when game launcher is ready....*/
 
-                            new StoreMenu().start(new Stage());
+                            new TroopSelectionMenu().start(new Stage());
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
