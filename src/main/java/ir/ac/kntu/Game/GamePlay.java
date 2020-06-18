@@ -38,7 +38,7 @@ public class GamePlay {
                 checkWinner();
             }
         }catch (Exception e){
-            checkWinner();
+            e.printStackTrace();
 
         }
 
