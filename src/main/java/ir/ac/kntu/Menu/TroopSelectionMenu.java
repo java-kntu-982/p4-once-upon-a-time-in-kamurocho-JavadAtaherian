@@ -1,6 +1,7 @@
 package ir.ac.kntu.Menu;
 
 import ir.ac.kntu.Database.Database;
+import ir.ac.kntu.Game.Graphics;
 import ir.ac.kntu.solider.Mercenaies;
 import ir.ac.kntu.solider.Player;
 import javafx.application.Application;
@@ -201,14 +202,14 @@ public class TroopSelectionMenu  extends Application {
                     System.out.println(player.toString());
                     if (Database.army.size()==10){
                         ((Node)(event.getSource())).getScene().getWindow().hide();
-//                        Platform.runLater(() -> {
-//                            try {
-//
-//                                new Game().start(new Stage());
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
-//                        });
+                        Platform.runLater(() -> {
+                            try {
+
+                                new Graphics().start(new Stage());
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        });
                     }
 
 

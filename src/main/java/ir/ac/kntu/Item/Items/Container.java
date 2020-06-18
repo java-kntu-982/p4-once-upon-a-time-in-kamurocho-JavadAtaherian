@@ -6,40 +6,35 @@ import javafx.scene.shape.Rectangle;
 
 
 public class Container extends Item {
-    private Rectangle shape ;
-    private int X;
-    private int Y;
+    private int x;
+    private int y;
 
 
-    public Container(String name,int x , int y) {
-        super(name, 3000);
-        this.X = x;
-        this.Y = y;
-        this.shape = new Rectangle(x,y,140,200);
+    public Container() {
+        super("Container", 3000);
+        this.x = 1050;
+        this.y = 200;
+        this.shape.setX(1050);
+        this.shape.setY(100);
+        this.shape.setWidth(140);
+        this.shape.setHeight(200);
         this.shape.setFill(Color.DARKSEAGREEN);
     }
 
     public int getX() {
-        return X;
+        return x;
     }
 
     public void setX(int x) {
-        X = x;
+        this.x = x;
     }
 
     public int getY() {
-        return Y;
+        return y;
     }
 
     public void setY(int y) {
-        Y = y;
+        this.y = y;
     }
 
-    public Rectangle getShape() {
-        return shape;
-    }
-
-    public void setShape(Rectangle shape) {
-        this.shape = shape;
-    }
 }

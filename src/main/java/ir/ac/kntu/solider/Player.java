@@ -20,7 +20,7 @@ public class Player {
 
     public Player(Mercenaies mercenaies ) {
         this.player = mercenaies;
-        this.currentX = RandomHelper.nextInt(200)+30;
+        this.currentX = RandomHelper.nextInt(300)+600;
         this.currentY = RandomHelper.nextInt(600)+30;
         this.currentHP = player.getHealth();
         this.speed = 4;
@@ -29,6 +29,9 @@ public class Player {
         this.shape = new Circle();
         this.shape.setRadius(15);
         this.shape.setFill(Color.PURPLE);
+        this.shape.setCenterX(this.currentX);
+        this.shape.setCenterY(this.currentY);
+
     }
 
     public Mercenaies getPlayer() {
@@ -85,6 +88,16 @@ public class Player {
     public void setAlive(boolean alive) {
         isAlive = alive;
     }
+
+    public Circle getShape() {
+        return shape;
+    }
+
+    public void setShape(Circle shape) {
+        this.shape = shape;
+    }
+
+
 
     @Override
     public String toString() {

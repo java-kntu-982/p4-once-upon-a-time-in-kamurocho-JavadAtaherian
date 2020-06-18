@@ -1,6 +1,7 @@
 package ir.ac.kntu.Database;
 
 import ir.ac.kntu.Currency.Currency;
+import ir.ac.kntu.Item.Item;
 import ir.ac.kntu.solider.Ai;
 import ir.ac.kntu.solider.Mercenaies;
 import ir.ac.kntu.solider.Player;
@@ -13,6 +14,7 @@ public class Database {
     public static LinkedList<Player> army = new LinkedList<>();//our army for the game
     public static LinkedList<Ai>  enemyArmy = new LinkedList<>();//enemy army for the game
     public static Currency wallet = new Currency(0);
+    public static LinkedList<Item> items = new LinkedList<>();
 
 
 

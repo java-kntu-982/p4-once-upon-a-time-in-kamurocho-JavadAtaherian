@@ -1,5 +1,6 @@
 package ir.ac.kntu.solider;
 
+import ir.ac.kntu.Database.RandomHelper;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -12,20 +13,32 @@ public class Ai {
     private int speed;
     private Circle shape;
     boolean isFighting;
+    boolean isAlive ;
 
 
 
 
-    public Ai(int index, int currentX, int currentY, int currentHP, int speed, boolean isFighting) {
-        this.ai = Enemies.byIndex(index);
-        this.currentX = currentX;
-        this.currentY = currentY;
-        this.currentHP = currentHP;
-        this.speed = speed;
-        this.isFighting = isFighting;
+    public Ai() {
+        int rand = RandomHelper.nextInt(4);
+        this.ai = Enemies.byIndex(rand);
+        this.currentX = RandomHelper.nextInt(200)+30;
+        this.currentY = RandomHelper.nextInt(600)+30;
+        this.currentHP = this.ai.getHealth();
+        if (rand==0){
+            this.speed = 3;
+        }
+        if (rand==2){
+            this.speed = 4;
+        }else{
+            this.speed = 2;
+        }
+        this.isFighting = false;
         this.shape = new Circle();
         this.shape.setRadius(10);
         this.shape.setFill(getColor());
+        this.shape.setCenterX(this.currentX);
+        this.shape.setCenterY(this.currentY);
+        this.isAlive = true;
 
     }
 
@@ -77,6 +90,29 @@ public class Ai {
         this.speed = speed;
     }
 
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public void setAlive(boolean alive) {
+        isAlive = alive;
+    }
+
+    public Circle getShape() {
+        return shape;
+    }
+
+    public void setShape(Circle shape) {
+        this.shape = shape;
+    }
+
+    public void relocate (int x , int y){
+        shape.setCenterX(x);
+        shape.setCenterY(y);
+        setCurrentX(x);
+        setCurrentY(y);
+    }
+
 
 
     Paint getColor(){
@@ -93,5 +129,17 @@ public class Ai {
             return Color.GREEN;
         }
         return Color.DARKRED;
+    }
+
+    @Override
+    public String toString() {
+        return "Ai{" +
+                "ai=" + ai.toString() +
+                ", currentX=" + currentX +
+                ", currentY=" + currentY +
+                ", currentHP=" + currentHP +
+                ", speed=" + speed +
+                ", isFighting=" + isFighting +
+                '}';
     }
 }

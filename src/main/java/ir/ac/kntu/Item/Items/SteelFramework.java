@@ -9,21 +9,17 @@ public class SteelFramework extends Item {
     private int x;
     private int y;
 
-    public SteelFramework(String name, int durability) {
-        super(name, 8500);
-        this.x = x;
-        this.y = y;
-        this.shape = new Rectangle(x,y,180,400);
+    public SteelFramework() {
+        super("SteelFramework", 8500);
+        this.x = 1000;
+        this.y = 150;
+        this.shape.setX(this.x);
+        this.shape.setY(this.y);
+        this.shape.setWidth(180);
+        this.shape.setHeight(400);
         this.shape.setFill(Color.SILVER);
     }
 
-    public Rectangle getShape() {
-        return shape;
-    }
-
-    public void setShape(Rectangle shape) {
-        this.shape = shape;
-    }
 
     public int getX() {
         return x;

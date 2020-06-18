@@ -7,14 +7,17 @@ import javafx.scene.shape.Rectangle;
 public class Van extends Item {
     private int x;
     private int y;
-    Rectangle shape ;
 
 
-    public Van(String name , int x , int y) {
-        super(name, 6000);
-        this.x = x;
-        this.y = y;
-        this.shape = new Rectangle(x,y,100,200);
+
+    public Van() {
+        super("Van", 6000);
+        this.x = 1050;
+        this.y = 500;
+        this.shape.setX(this.x);
+        this.shape.setY(this.y);
+        this.shape.setWidth(100);
+        this.shape.setHeight(200);
         this.shape.setFill(Color.DARKORANGE);
 
     }
@@ -35,11 +38,5 @@ public class Van extends Item {
         this.y = y;
     }
 
-    public Rectangle getShape() {
-        return shape;
-    }
 
-    public void setShape(Rectangle shape) {
-        this.shape = shape;
-    }
 }

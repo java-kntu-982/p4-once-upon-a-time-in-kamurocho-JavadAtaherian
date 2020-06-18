@@ -7,14 +7,17 @@ import javafx.scene.shape.Rectangle;
 public class Truck extends Item {
     int x;
     int y;
-    Rectangle shape ;
 
 
-    public Truck(String name, int x , int y) {
-        super(name, 5000);
-        this.x = x;
-        this.y = y;
-        this.shape = new Rectangle(x,y,100,170);
+
+    public Truck() {
+        super("Truck", 5000);
+        this.x = 1050;
+        this.y = 450;
+        this.shape.setX(this.x);
+        this.shape.setY(this.y);
+        this.shape.setWidth(100);
+        this.shape.setHeight(170);
         this.shape.setFill(Color.DARKGRAY);
     }
 
@@ -34,11 +37,5 @@ public class Truck extends Item {
         this.y = y;
     }
 
-    public Rectangle getShape() {
-        return shape;
-    }
 
-    public void setShape(Rectangle shape) {
-        this.shape = shape;
-    }
 }

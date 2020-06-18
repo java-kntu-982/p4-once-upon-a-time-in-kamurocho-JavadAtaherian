@@ -1,6 +1,11 @@
 package ir.ac.kntu;
 
 import ir.ac.kntu.Database.Database;
+import ir.ac.kntu.Database.RandomHelper;
+import ir.ac.kntu.Game.Graphics;
+import ir.ac.kntu.Game.InitializingEnemies;
+import ir.ac.kntu.Item.Item;
+import ir.ac.kntu.Item.Items.InitializingItems;
 import ir.ac.kntu.Menu.MainMenu;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -22,7 +27,11 @@ public class Main {
     public static void main(String[] args) {
         Database.addTheFreeMercenary();
         Database.set500ToWallet();
+        InitializingItems.createItems();
+        InitializingEnemies.createEnemies();
+//        Graphics.main(args);
         MainMenu.main(args);
+
     }
 
 
